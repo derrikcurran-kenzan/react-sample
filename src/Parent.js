@@ -12,11 +12,32 @@ class Parent extends Component {
 
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      childVisible: false,
+    };
+
+    this.handleToggleChild = this.handleToggleChild.bind(this);
+  }
+
+  handleToggleChild() {
+    this.setState({
+      childVisible: !this.state.childVisible,
+    });
+  }
+
   render() {
+    const {
+      childVisible,
+    } = this.state;
+
     return (
       <div>
         <h1>Parent Component</h1>
-        <Child
+        <button onClick={this.handleToggleChild}>Toggle Child</button>
+        {childVisible && <Child
           label="Child Comp."
           items={[
             'Item 1 (string)',
@@ -26,7 +47,7 @@ class Parent extends Component {
           options={{
             labelTransform: LABEL_TRANSFORM.UPPERCASE,
           }}
-        />
+        />}
       </div>
     );
   }
