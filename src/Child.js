@@ -13,11 +13,23 @@ class Child extends Component {
     options: PropTypes.shape({
       labelTransform: PropTypes.oneOf(Object.values(LABEL_TRANSFORM)),
     }),
+    onMessageClick: PropTypes.func,
   };
 
   static defaultProps = {
     label: 'Child Component',
   };
+
+  constructor(props) {
+    super(props);
+    this.handleMessageClick = this.handleMessageClick.bind(this);
+  }
+
+  handleMessageClick() {
+    if (this.props.onMessageClick) {
+      this.props.onMessageClick();
+    }
+  }
 
   renderLabel() {
     const {
@@ -63,6 +75,8 @@ class Child extends Component {
             </li>
           ))}
         </ul>
+
+        <button onClick={this.handleMessageClick}>Hello World</button>
       </div>
     );
   }

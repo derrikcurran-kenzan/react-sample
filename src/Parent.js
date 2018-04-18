@@ -17,26 +17,39 @@ class Parent extends Component {
 
     this.state = {
       childVisible: false,
+      childMessageVisible: false,
     };
 
-    this.handleToggleChild = this.handleToggleChild.bind(this);
+    this.handleToggleChildClick = this.handleToggleChildClick.bind(this);
+    this.handleChildMessageClick = this.handleChildMessageClick.bind(this);
   }
 
-  handleToggleChild() {
+  handleToggleChildClick() {
     this.setState({
       childVisible: !this.state.childVisible,
+    });
+  }
+
+  handleChildMessageClick() {
+    this.setState({
+      childMessageVisible: !this.state.childMessageVisible,
     });
   }
 
   render() {
     const {
       childVisible,
+      childMessageVisible,
     } = this.state;
 
     return (
       <div>
         <h1>Parent Component</h1>
-        <button onClick={this.handleToggleChild}>Toggle Child</button>
+
+        <button onClick={this.handleToggleChildClick}>Toggle Child</button>
+
+        {childMessageVisible && 'Hello World'}
+
         {childVisible && <Child
           label="Child Comp."
           items={[
@@ -47,6 +60,7 @@ class Parent extends Component {
           options={{
             labelTransform: LABEL_TRANSFORM.UPPERCASE,
           }}
+          onMessageClick={this.handleChildMessageClick}
         />}
       </div>
     );
