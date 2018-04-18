@@ -13,6 +13,8 @@ class Child extends Component {
     options: PropTypes.shape({
       headerTransform: PropTypes.oneOf(Object.values(HEADER_TRANSFORM)),
     }),
+    addChildItem: PropTypes.func,
+    resetChildItems: PropTypes.func,
     onMessageClick: PropTypes.func,
   };
 
@@ -23,6 +25,18 @@ class Child extends Component {
   constructor(props) {
     super(props);
     this.handleMessageClick = this.handleMessageClick.bind(this);
+  }
+
+  componentWillMount() {
+    if (this.props.addChildItem) {
+      this.props.addChildItem('Added String');
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.props.resetChildItems) {
+      this.props.resetChildItems();
+    }
   }
 
   handleMessageClick() {

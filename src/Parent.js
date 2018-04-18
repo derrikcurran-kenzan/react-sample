@@ -18,14 +18,30 @@ class Parent extends Component {
     this.state = {
       childVisible: false,
       childMessageVisible: false,
+      addedChildItems: [],
     };
 
     this.handleToggleChildClick = this.handleToggleChildClick.bind(this);
     this.handleChildMessageClick = this.handleChildMessageClick.bind(this);
+    this.addChildItem = this.addChildItem.bind(this);
+    this.resetChildItems = this.resetChildItems.bind(this);
   }
 
   componentWillMount() {
     window.document.title = 'React Exercise';
+  }
+
+  addChildItem(item) {
+    this.setState({
+      addedChildItems: [
+        ...this.state.addedChildItems,
+        item,
+      ],
+    })
+  }
+
+  resetChildItems() {
+    this.setState({ addedChildItems: [] });
   }
 
   handleToggleChildClick() {
@@ -46,6 +62,7 @@ class Parent extends Component {
     const {
       childVisible,
       childMessageVisible,
+      addedChildItems,
     } = this.state;
 
     return (
@@ -66,10 +83,13 @@ class Parent extends Component {
             'Item 1 (string)',
             <span>Item 2 (span)</span>,
             <strong>Item 3 (strong)</strong>,
+            ...addedChildItems,
           ]}
           options={{
             headerTransform: HEADER_TRANSFORM.UPPERCASE,
           }}
+          addChildItem={this.addChildItem}
+          resetChildItems={this.resetChildItems}
           onMessageClick={this.handleChildMessageClick}
         />}
       </div>
