@@ -69,8 +69,8 @@ class Child extends Component {
 
         <h3>Options:</h3>
         <ul className={`${cnRoot}--options`}>
-          {options && Object.entries(options).map(([optionKey, optionValue]) => (
-            <li>
+          {options && Object.entries(options).map(([optionKey, optionValue], idx) => (
+            <li key={idx}>
               <strong>{optionKey}</strong>: {optionValue}
             </li>
           ))}
