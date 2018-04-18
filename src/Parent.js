@@ -24,6 +24,10 @@ class Parent extends Component {
     this.handleChildMessageClick = this.handleChildMessageClick.bind(this);
   }
 
+  componentWillMount() {
+    window.document.title = 'React Exercise';
+  }
+
   handleToggleChildClick() {
     this.setState({
       childVisible: !this.state.childVisible,
