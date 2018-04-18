@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Child, { LABEL_TRANSFORM } from './Child';
+import Child, { HEADER_TRANSFORM } from './Child';
 
 class Parent extends Component {
   static propTypes = {
@@ -37,28 +37,34 @@ class Parent extends Component {
   }
 
   render() {
+    const cnRoot = 'Parent';
+
     const {
       childVisible,
       childMessageVisible,
     } = this.state;
 
     return (
-      <div>
-        <h1>Parent Component</h1>
+      <div className={cnRoot}>
+        <h1 className={`${cnRoot}--header`}>Parent Component</h1>
 
-        <button onClick={this.handleToggleChildClick}>Toggle Child</button>
+        <button
+          className={`${cnRoot}--btn-toggle-child`}
+          onClick={this.handleToggleChildClick}
+        >Toggle Child</button>
 
-        {childMessageVisible && 'Hello World'}
+        {childMessageVisible && <div className={`${cnRoot}--child-message`}>Hello World</div>}
 
         {childVisible && <Child
-          label="Child Comp."
+          className={`${cnRoot}--child`}
+          header='Child Comp.'
           items={[
             'Item 1 (string)',
             <span>Item 2 (span)</span>,
             <strong>Item 3 (strong)</strong>,
           ]}
           options={{
-            labelTransform: LABEL_TRANSFORM.UPPERCASE,
+            headerTransform: HEADER_TRANSFORM.UPPERCASE,
           }}
           onMessageClick={this.handleChildMessageClick}
         />}

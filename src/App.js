@@ -5,7 +5,7 @@ import Parent from './Parent';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className='App'>
         <Parent />
       </div>
     );

@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const LABEL_TRANSFORM = Object.freeze({
+const HEADER_TRANSFORM = Object.freeze({
   UPPERCASE: 'uppercase',
   LOWERCASE: 'lowercase',
 });
 
 class Child extends Component {
   static propTypes = {
-    label: PropTypes.string,
+    header: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.node),
     options: PropTypes.shape({
-      labelTransform: PropTypes.oneOf(Object.values(LABEL_TRANSFORM)),
+      headerTransform: PropTypes.oneOf(Object.values(HEADER_TRANSFORM)),
     }),
     onMessageClick: PropTypes.func,
   };
 
   static defaultProps = {
-    label: 'Child Component',
+    header: 'Child Component',
   };
 
   constructor(props) {
@@ -31,28 +31,28 @@ class Child extends Component {
     }
   }
 
-  renderLabel() {
+  renderHeader() {
     const {
-      label = '',
+      header = '',
       options: {
-        labelTransform,
+        headerTransform,
       } = {},
     } = this.props;
 
-    switch (labelTransform) {
-      case LABEL_TRANSFORM.UPPERCASE:
-        return label.toUpperCase();
-      case LABEL_TRANSFORM.LOWERCASE:
-        return label.toLowerCase();
+    switch (headerTransform) {
+      case HEADER_TRANSFORM.UPPERCASE:
+        return header.toUpperCase();
+      case HEADER_TRANSFORM.LOWERCASE:
+        return header.toLowerCase();
       default:
-        return label;
+        return header;
     }
   }
 
   render() {
     const cnRoot = 'Child';
 
-    const label = this.renderLabel();
+    const header = this.renderHeader();
     const {
       items,
       options,
@@ -60,15 +60,15 @@ class Child extends Component {
 
     return (
       <div className={cnRoot}>
-        <h1 className={`${cnRoot}-label`}>{label}</h1>
+        <h1 className={`${cnRoot}--header`}>{header}</h1>
 
         <h3>Items:</h3>
-        <ul className={`${cnRoot}-items`}>
+        <ul className={`${cnRoot}--items`}>
           {items && items.map((item, idx) => <li key={idx}>{item}</li>)}
         </ul>
 
         <h3>Options:</h3>
-        <ul className={`${cnRoot}-options`}>
+        <ul className={`${cnRoot}--options`}>
           {options && Object.entries(options).map(([optionKey, optionValue]) => (
             <li>
               <strong>{optionKey}</strong>: {optionValue}
@@ -76,7 +76,10 @@ class Child extends Component {
           ))}
         </ul>
 
-        <button onClick={this.handleMessageClick}>Hello World</button>
+        <button
+          className={`${cnRoot}--btn-message`}
+          onClick={this.handleMessageClick}
+        >Hello World</button>
       </div>
     );
   }
@@ -84,5 +87,5 @@ class Child extends Component {
 
 export default Child;
 export {
-  LABEL_TRANSFORM,
+  HEADER_TRANSFORM,
 };
