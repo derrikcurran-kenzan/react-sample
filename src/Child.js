@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import './Child.css';
+
 const HEADER_TRANSFORM = Object.freeze({
   UPPERCASE: 'uppercase',
   LOWERCASE: 'lowercase',

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import Child, { HEADER_TRANSFORM } from './Child';
 
+import './Parent.css';
+
 class Parent extends Component {
   static propTypes = {
 
