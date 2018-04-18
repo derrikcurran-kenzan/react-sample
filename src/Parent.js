@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import Child, { HEADER_TRANSFORM } from './Child';
 
