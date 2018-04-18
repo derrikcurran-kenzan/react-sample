@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Child from './Child';
+import Child, { LABEL_TRANSFORM } from './Child';
 
 class Parent extends Component {
   static propTypes = {
@@ -16,7 +16,17 @@ class Parent extends Component {
     return (
       <div>
         <h1>Parent Component</h1>
-        <Child />
+        <Child
+          label="Child Comp."
+          items={[
+            'Item 1 (string)',
+            <span>Item 2 (span)</span>,
+            <strong>Item 3 (strong)</strong>,
+          ]}
+          options={{
+            labelTransform: LABEL_TRANSFORM.UPPERCASE,
+          }}
+        />
       </div>
     );
   }
