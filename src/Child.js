@@ -8,6 +8,7 @@ const HEADER_TRANSFORM = Object.freeze({
 
 class Child extends Component {
   static propTypes = {
+    className: PropTypes.string,
     header: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.node),
     options: PropTypes.shape({
@@ -73,12 +74,13 @@ class Child extends Component {
 
     const header = this.renderHeader();
     const {
+      className,
       items,
       options,
     } = this.props;
 
     return (
-      <div className={cnRoot}>
+      <div className={[cnRoot, className].filter(c => c).join(' ')}>
         <h1 className={`${cnRoot}--header`}>{header}</h1>
 
         <h3>Items:</h3>
