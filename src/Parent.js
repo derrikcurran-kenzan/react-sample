@@ -19,12 +19,14 @@ class Parent extends Component {
       childVisible: false,
       childMessageVisible: false,
       addedChildItems: [],
+      activityEvents: [],
     };
 
-    this.handleToggleChildClick = this.handleToggleChildClick.bind(this);
-    this.handleChildMessageClick = this.handleChildMessageClick.bind(this);
     this.addChildItem = this.addChildItem.bind(this);
     this.resetChildItems = this.resetChildItems.bind(this);
+    this.logActivityEvent = this.logActivityEvent.bind(this);
+    this.handleToggleChildClick = this.handleToggleChildClick.bind(this);
+    this.handleChildMessageClick = this.handleChildMessageClick.bind(this);
   }
 
   componentWillMount() {
@@ -42,6 +44,15 @@ class Parent extends Component {
 
   resetChildItems() {
     this.setState({ addedChildItems: [] });
+  }
+
+  logActivityEvent(activityEvent) {
+    this.setState({
+      activityEvents: [
+        ...this.state.activityEvents,
+        activityEvent,
+      ],
+    });
   }
 
   handleToggleChildClick() {
@@ -63,6 +74,7 @@ class Parent extends Component {
       childVisible,
       childMessageVisible,
       addedChildItems,
+      activityEvents,
     } = this.state;
 
     return (
@@ -90,8 +102,15 @@ class Parent extends Component {
           }}
           addChildItem={this.addChildItem}
           resetChildItems={this.resetChildItems}
+          logActivityEvent={this.logActivityEvent}
           onMessageClick={this.handleChildMessageClick}
+          onUnmount={this.logActivityEvent.bind(this, 'Child Component Removed')}
         />}
+
+        <h3>Activity Log:</h3>
+        <ul className={`${cnRoot}--activity`}>
+          {activityEvents && activityEvents.map((event, idx) => <li key={idx}>{event}</li>)}
+        </ul>
       </div>
     );
   }

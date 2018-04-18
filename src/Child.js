@@ -16,6 +16,7 @@ class Child extends Component {
     addChildItem: PropTypes.func,
     resetChildItems: PropTypes.func,
     onMessageClick: PropTypes.func,
+    onUnmount: PropTypes.func,
   };
 
   static defaultProps = {
@@ -34,9 +35,13 @@ class Child extends Component {
   }
 
   componentWillUnmount() {
-    if (this.props.resetChildItems) {
-      this.props.resetChildItems();
-    }
+    const {
+      resetChildItems,
+      onUnmount,
+    } = this.props;
+
+    resetChildItems && resetChildItems();
+    onUnmount && onUnmount();
   }
 
   handleMessageClick() {
